@@ -16,6 +16,28 @@ namespace CustomAlert.ViewModels
             set { SetProperty(ref _title, value); }
         }
 
+        private bool _isAlert;
+        public bool IsAlert
+        {
+            get { return _isAlert; }
+            set { SetProperty(ref _isAlert, value); }
+        }
+
+        private DelegateCommand<object> _onAlertCommand;
+        public DelegateCommand<object> OnAlertCommand =>
+            _onAlertCommand ?? (_onAlertCommand = new DelegateCommand<object>(arg =>
+            {
+                if ((bool)arg)
+                    return;
+            }));
+
+        private DelegateCommand _buttonCommand;
+        public DelegateCommand BttonCommand =>
+            _buttonCommand ?? (_buttonCommand = new DelegateCommand(() =>
+            {
+                IsAlert = true;
+            }));
+
         public MainPageViewModel()
         {
 

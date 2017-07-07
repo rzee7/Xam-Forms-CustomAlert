@@ -98,9 +98,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\fail.png" />
-    <Content Include="Images\info.png" />
-    <Content Include="Images\success.png" />
+    <EmbeddedResource Include="Images\fail.png" />
+    <EmbeddedResource Include="Images\info.png" />
+    <EmbeddedResource Include="Images\success.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Controls\AlertView.xaml">

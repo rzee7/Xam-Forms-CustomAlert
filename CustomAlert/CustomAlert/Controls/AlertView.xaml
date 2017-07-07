@@ -10,8 +10,9 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="1"
-                  HorizontalOptions="Fill"
-                  VerticalOptions="Fill">
+                  Margin="20"
+                  HorizontalOptions="Center"
+                  VerticalOptions="Center">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50" />
                     <RowDefinition Height="*" />
@@ -19,10 +20,38 @@
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Image Aspect="AspectFit" Source="{Binding AlertImage}" />
+                <Image Grid.Row="0"
+                       Grid.Column="0"
+                       Aspect="AspectFit"
+                       Source="{Binding AlertImage}" />
+                <Label Grid.Row="0"
+                       Grid.Column="1"
+                       Grid.ColumnSpan="2"
+                       Text="{Binding Title}" />
+                <StackLayout Grid.Row="1"
+                             Grid.Column="1"
+                             Grid.ColumnSpan="3"
+                             HorizontalOptions="Fill"
+                             Padding="5"
+                             VerticalOptions="Fill">
+                    <Label HorizontalOptions="Fill"
+                           Text="{Binding Description}"
+                           VerticalOptions="Fill" />
+                </StackLayout>
+                <Button Grid.Row="2"
+                        Grid.Column="0"
+                        Command="{Binding ButtonCommand}"
+                        CommandParameter="no"
+                        IsVisible="{Binding HasMoreButton}"
+                        Text="{Binding NegativeButtonTitle}" />
+                <Button Grid.Row="2"
+                        Grid.Column="2"
+                        Command="{Binding ButtonCommand}"
+                        CommandParameter="yes"
+                        Text="{Binding PositiveButtonTitle}" />
             </Grid>
         </Grid>
     </ContentView.Content>

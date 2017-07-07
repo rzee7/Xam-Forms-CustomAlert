@@ -1,11 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage x:Class="CustomAlert.Views.MainPage"
+             xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:CustomAlert.Controls;assembly=CustomAlert"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="CustomAlert.Views.MainPage"
-             Title="MainPage">
-  <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-    <Label Text="{Binding Title}" />
-  </StackLayout>
+             Title="MainPage"
+             prism:ViewModelLocator.AutowireViewModel="True">
+    <Grid x:Name="gg">
+        <StackLayout>
+            <Label Text="dbsjvsjvhhsdk sdvjhsbvs svjhsv svjhbsv s jh sskh s  kj ks s jsjsdbsjvsjvhhsdk sdvjhsbvs svjhsv svjhbsv s jh sskh s  kj ks s jsjsdbsjvsjvhhsdk sdvjhsbvs svjhsv svjhbsv s jh sskh s  kj ks s jsjs" />
+            <Button Command="{Binding BttonCommand}" Text="Success" />
+        </StackLayout>
+        <control:AlertView Title="Testing..."
+                           AlertType="Success"
+                           Description="This is only for testing pupose!"
+                           IsVisible="{Binding IsAlert}"
+                           NegativeButtonTitle="Cancel"
+                           OnCommand="{Binding OnAlertCommand}"
+                           PositiveButtonTitle="Ok" />
+    </Grid>
 </ContentPage>

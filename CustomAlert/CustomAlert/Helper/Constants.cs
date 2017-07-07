@@ -30,8 +30,11 @@ namespace CustomAlert
                 default:
                     break;
             }
-            return string.Format("{0}.{1}.png", typeof(Constants).GetTypeInfo().Assembly.GetName(), fileName);
+            return string.Format("{0}.Images.{1}.png", typeof(Constants).Namespace, fileName);
         }
+
+        public const string CancelButtonTitle = "Cancel";
+        public const string OkButtonTitle = "Ok";
     }
     public enum AlertTypes
     {
