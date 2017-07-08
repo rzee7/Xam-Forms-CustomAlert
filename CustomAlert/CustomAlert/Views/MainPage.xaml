@@ -8,15 +8,19 @@
              prism:ViewModelLocator.AutowireViewModel="True">
     <Grid x:Name="gg">
         <StackLayout>
-            <Label Text="dbsjvsjvhhsdk sdvjhsbvs svjhsv svjhbsv s jh sskh s  kj ks s jsjsdbsjvsjvhhsdk sdvjhsbvs svjhsv svjhbsv s jh sskh s  kj ks s jsjsdbsjvsjvhhsdk sdvjhsbvs svjhsv svjhbsv s jh sskh s  kj ks s jsjs" />
-            <Button Command="{Binding BttonCommand}" Text="Success" />
+            <Label Text="Here are some action to show custom alert. It includes icon, header, description with two buttons. Where we can have only one button as well." />
+            <Button Command="{Binding SuccessCommand}" Text="Success" />
+            <Button Command="{Binding ErrorCommand}" Text="Error" />
+            <Button Command="{Binding InfoCommand}" Text="Info" />
         </StackLayout>
-        <control:AlertView Title="Testing..."
-                           AlertType="Success"
-                           Description="This is only for testing pupose!"
-                           IsVisible="{Binding IsAlert}"
+        <control:AlertView AlertTitle="{Binding Title}"
+                           AlertType="{Binding Alert}"
+                           Description="{Binding Description}"
+                           HasPositiveButton="{Binding HasPositiveButton}"
+                           IsVisible="{Binding IsAlert,
+                                               Mode=TwoWay}"
                            NegativeButtonTitle="Cancel"
                            OnCommand="{Binding OnAlertCommand}"
-                           PositiveButtonTitle="Ok" />
+                           PositiveButtonTitle="Proceed" />
     </Grid>
 </ContentPage>

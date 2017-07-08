@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -17,13 +18,13 @@ namespace CustomAlert.Controls
 
         #region Bindable Properties
 
-        public static readonly BindableProperty TitleProperty =
-                               BindableProperty.Create("Title", typeof(string), typeof(AlertView), "", defaultBindingMode: BindingMode.TwoWay);
+        public static readonly BindableProperty AlertTitleProperty =
+                               BindableProperty.Create("AlertTitle", typeof(string), typeof(AlertView), "", defaultBindingMode: BindingMode.TwoWay);
 
-        public string Title
+        public string AlertTitle
         {
-            get { return (string)GetValue(TitleProperty); }
-            set { SetValue(TitleProperty, value); }
+            get { return (string)GetValue(AlertTitleProperty); }
+            set { SetValue(AlertTitleProperty, value); }
         }
 
         public static readonly BindableProperty DescriptionProperty =
@@ -53,15 +54,24 @@ namespace CustomAlert.Controls
             set { SetValue(NegativeButtonTitleProperty, value); }
         }
 
-        public static readonly BindableProperty HasMoreButtonProperty =
-                       BindableProperty.Create("HasMoreButton", typeof(bool), typeof(AlertView), false, defaultBindingMode:BindingMode.TwoWay, propertyChanged: (b, o, n) =>
+        public static readonly BindableProperty HeaderBackgroundColorProperty =
+                       BindableProperty.Create("HeaderBackgroundColor", typeof(Color), typeof(AlertView), Color.FromHex("#2D9EE0"), defaultBindingMode: BindingMode.TwoWay);
+
+        public Color HeaderBackgroundColor
+        {
+            get { return (Color)GetValue(HeaderBackgroundColorProperty); }
+            set { SetValue(HeaderBackgroundColorProperty, value); }
+        }
+
+        public static readonly BindableProperty HasPositiveButtonProperty =
+                       BindableProperty.Create("HasPositiveButton", typeof(bool), typeof(AlertView), false, defaultBindingMode:BindingMode.TwoWay, propertyChanged: (b, o, n) =>
                        {
                        });
 
-        public bool HasMoreButton
+        public bool HasPositiveButton
         {
-            get { return (bool)GetValue(HasMoreButtonProperty); }
-            set { SetValue(HasMoreButtonProperty, value); }
+            get { return (bool)GetValue(HasPositiveButtonProperty); }
+            set { SetValue(HasPositiveButtonProperty, value); }
         }
 
         public static readonly BindableProperty AlertTypeProperty =
@@ -85,11 +95,13 @@ namespace CustomAlert.Controls
             set { SetValue(AlertTypeProperty, value); }
         }
 
-        private ImageSource _alertImage;
+        public static readonly BindableProperty AlertImageProperty =
+                       BindableProperty.Create("AlertImage", typeof(ImageSource), typeof(AlertView), null);
+
         public ImageSource AlertImage
         {
-            get { return _alertImage; }
-            set { _alertImage = value; }
+            get { return (ImageSource)GetValue(AlertImageProperty); }
+            set { SetValue(AlertImageProperty, value); }
         }
 
         public static readonly BindableProperty CommandParameterProperty =
@@ -114,19 +126,13 @@ namespace CustomAlert.Controls
             set { SetValue(OnCommandProperty, value); }
         }
 
-        private Command<string> _buttonCommand;
         public Command<string> ButtonCommand
         {
             get
             {
-                return _buttonCommand ?? new Command<string>(arg =>
+                return new Command<string>(arg =>
                 {
                     IsVisible = false;
-                    Description = string.Empty;
-                    Title = string.Empty;
-                    PositiveButtonTitle = Constants.OkButtonTitle;
-                    NegativeButtonTitle = Constants.CancelButtonTitle;
-                    HasMoreButton = false;
                     if (OnCommand != null)
                         OnCommand.Execute(arg.Equals("yes", StringComparison.CurrentCultureIgnoreCase)); //True: If pressed 'Yes' Button.
                 });
@@ -135,6 +141,12 @@ namespace CustomAlert.Controls
 
 
         #endregion
+
+        protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            base.OnPropertyChanged(propertyName);
+            var d = Description;
+        }
 
     }
 }

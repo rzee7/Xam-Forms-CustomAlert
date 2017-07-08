@@ -1,58 +1,63 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <ContentView x:Class="CustomAlert.Controls.AlertView"
              xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Name="this"
+             BackgroundColor="#80000000">
     <ContentView.Content>
         <Grid HorizontalOptions="Fill" VerticalOptions="Fill">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="2*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Column="1"
-                  Margin="20"
-                  HorizontalOptions="Center"
-                  VerticalOptions="Center">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="50" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Image Grid.Row="0"
-                       Grid.Column="0"
-                       Aspect="AspectFit"
-                       Source="{Binding AlertImage}" />
-                <Label Grid.Row="0"
-                       Grid.Column="1"
-                       Grid.ColumnSpan="2"
-                       Text="{Binding Title}" />
-                <StackLayout Grid.Row="1"
-                             Grid.Column="1"
-                             Grid.ColumnSpan="3"
-                             HorizontalOptions="Fill"
-                             Padding="5"
-                             VerticalOptions="Fill">
-                    <Label HorizontalOptions="Fill"
-                           Text="{Binding Description}"
-                           VerticalOptions="Fill" />
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackLayout Grid.Row="1"
+                         Margin="20"
+                         BackgroundColor="White"
+                         HorizontalOptions="Fill"
+                         VerticalOptions="CenterAndExpand">
+                <StackLayout BackgroundColor="{Binding HeaderBackgroundColor,
+                                                       Source={x:Reference this}}"
+                             Orientation="Horizontal"
+                             Padding="5">
+                    <Image Aspect="AspectFit"
+                           HeightRequest="32"
+                           Source="{Binding AlertImage,
+                                            Source={x:Reference this}}"
+                           VerticalOptions="Start"
+                           WidthRequest="32" />
+                    <Label FontSize="Medium"
+                           HorizontalOptions="StartAndExpand"
+                           Text="{Binding AlertTitle,
+                                          Source={x:Reference this}}"
+                           TextColor="White"
+                           VerticalOptions="CenterAndExpand" />
                 </StackLayout>
-                <Button Grid.Row="2"
-                        Grid.Column="0"
-                        Command="{Binding ButtonCommand}"
-                        CommandParameter="no"
-                        IsVisible="{Binding HasMoreButton}"
-                        Text="{Binding NegativeButtonTitle}" />
-                <Button Grid.Row="2"
-                        Grid.Column="2"
-                        Command="{Binding ButtonCommand}"
-                        CommandParameter="yes"
-                        Text="{Binding PositiveButtonTitle}" />
-            </Grid>
+                <ContentView Margin="0,10,0,20" Padding="10">
+                    <Label HorizontalOptions="CenterAndExpand"
+                           LineBreakMode="WordWrap"
+                           Text="{Binding Description,
+                                          Source={x:Reference this}}"
+                           TextColor="Black"
+                           VerticalOptions="Fill" />
+                </ContentView>
+                <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                    <Button Command="{Binding ButtonCommand,
+                                              Source={x:Reference this}}"
+                            CommandParameter="no"
+                            HorizontalOptions="FillAndExpand"
+                            Text="{Binding NegativeButtonTitle,
+                                           Source={x:Reference this}}" />
+                    <Button Command="{Binding ButtonCommand,
+                                              Source={x:Reference this}}"
+                            CommandParameter="yes"
+                            HorizontalOptions="FillAndExpand"
+                            IsVisible="{Binding HasPositiveButton,
+                                                Source={x:Reference this}}"
+                            Text="{Binding PositiveButtonTitle,
+                                           Source={x:Reference this}}" />
+                </StackLayout>
+            </StackLayout>
         </Grid>
     </ContentView.Content>
 </ContentView>
