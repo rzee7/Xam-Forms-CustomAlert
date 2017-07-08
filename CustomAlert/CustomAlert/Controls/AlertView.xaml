@@ -36,19 +36,24 @@
                 <ContentView Margin="0,10,0,20" Padding="10">
                     <Label HorizontalOptions="CenterAndExpand"
                            LineBreakMode="WordWrap"
+                           Style="{StaticResource labelStyle}"
                            Text="{Binding Description,
                                           Source={x:Reference this}}"
                            TextColor="Black"
                            VerticalOptions="Fill" />
                 </ContentView>
-                <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
-                    <Button Command="{Binding ButtonCommand,
+                <StackLayout HorizontalOptions="FillAndExpand"
+                             Orientation="Horizontal"
+                             Padding="5">
+                    <Button BackgroundColor="Silver"
+                            Command="{Binding ButtonCommand,
                                               Source={x:Reference this}}"
                             CommandParameter="no"
                             HorizontalOptions="FillAndExpand"
                             Text="{Binding NegativeButtonTitle,
                                            Source={x:Reference this}}" />
-                    <Button Command="{Binding ButtonCommand,
+                    <Button BackgroundColor="Silver"
+                            Command="{Binding ButtonCommand,
                                               Source={x:Reference this}}"
                             CommandParameter="yes"
                             HorizontalOptions="FillAndExpand"

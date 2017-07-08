@@ -24,7 +24,7 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <MtouchArch>i386, x86_64</MtouchArch>
-    <MtouchLink>None</MtouchLink>
+    <MtouchLink>SdkOnly</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
@@ -100,6 +100,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CustomAlert\CustomAlert.csproj">
       <Name>CustomAlert</Name>
+      <Project>{113AAB9F-9D96-4BF9-86E7-0C65417B9B9F}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
