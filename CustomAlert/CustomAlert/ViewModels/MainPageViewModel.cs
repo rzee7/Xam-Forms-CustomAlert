@@ -44,12 +44,22 @@ namespace CustomAlert.ViewModels
 			set { SetProperty(ref _hasPositiveButton, value); }
 		}
 
-		private DelegateCommand<object> _onAlertCommand;
+        private string _okbutton = "Cancel";
+        public string OkButton
+        {
+            get { return _okbutton; }
+            set { SetProperty(ref _okbutton, value); }
+        }
+
+        private DelegateCommand<object> _onAlertCommand;
 		public DelegateCommand<object> OnAlertCommand =>
 			_onAlertCommand ?? (_onAlertCommand = new DelegateCommand<object>(arg =>
 			{
-				if ((bool)arg)
-					SuccessCommand.Execute();
+                if ((bool)arg)
+                {
+                    OkButton = "Ok";
+                    SuccessCommand.Execute();
+                }
 			}));
 
 		private DelegateCommand _successCommand;
@@ -58,7 +68,7 @@ namespace CustomAlert.ViewModels
 			{
 				Title = "Success";
 				Alert = AlertTypes.Success;
-				Description = "I'm happy 2 hear that friend! Keep fulfilling ur dreams & make every single day count Success is just within ur reach";
+				Description = "I'm happy to hear that friend! Keep fulfilling your dreams & make every single day count Success is just within your reach.";
 				HasPositiveButton = false;
 				IsAlert = true;
 			}));

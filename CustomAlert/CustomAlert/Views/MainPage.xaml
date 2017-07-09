@@ -25,7 +25,7 @@
                            HasPositiveButton="{Binding HasPositiveButton}"
                            IsVisible="{Binding IsAlert,
                                                Mode=TwoWay}"
-                           NegativeButtonTitle="Cancel"
+                           NegativeButtonTitle="{Binding OkButton}"
                            OnCommand="{Binding OnAlertCommand}"
                            PositiveButtonTitle="Proceed" />
     </Grid>
